@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honguito Especial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #d77a8c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('honguito.jpg');
+            background-size: 800px 600px;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.35);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button-yes {
+            background-color: #4caf50;
+            color: white;
+        }
+        .button-no {
+            background-color: #f44336;
+            color: white;
+        }
+        .button-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¿Quieres salir conmigo?</h1>
+        <div class="buttons" id="buttons-container">
+            <button id="yes-button" class="button button-yes">Sí</button>
+            <button id="no-button" class="button button-no">No</button>
+        </div>
+        <p id="message" style="display: none; font-size: 20px; color: #333; margin-top: 20px;">¡Me encantas! 🥰</p>
+    </div>
+
+    <script>
+        const yesButton = document.getElementById('yes-button');
+        const noButton = document.getElementById('no-button');
+        const message = document.getElementById('message');
+        const buttonsContainer = document.getElementById('buttons-container');
+
+        const messages = [
+            '¿Estás segura? 🤔',
+            '¿De verdad no quieres salir conmigo? 🥺',
+            '¡Piensa bien antes de decidir! 😅',
+            '¡Vamos, no seas tímida! 😘',
+            '¿Por qué no intentarlo? 🧐',
+            '¡Podemos pasarla genial! 🤩',
+            'No te arrepentirás 😍',
+            '¡Dame una oportunidad! 😘',
+            'No seas tan dura conmigo 🥹',
+            '¡Estoy seguro de que te encantará! 💖'
+        ];
+
+        let noClickCount = 0;
+
+        yesButton.addEventListener('click', () => {
+            message.style.display = 'block';
+            message.textContent = '¡Me encantas! 🥰';
+        });
+
+        noButton.addEventListener('click', () => {
+            noClickCount++;
+            noButton.style.transform = `scale(${1 - noClickCount * 0.1})`;
+
+            const newYesButton = document.createElement('button');
+            newYesButton.textContent = 'Sí';
+            newYesButton.className = 'button button-yes';
+            newYesButton.addEventListener('click', () => {
+                message.style.display = 'block';
+                message.textContent = '¡Me encantas! 🥰';
+            });
+
+            buttonsContainer.appendChild(newYesButton);
+
+            if (noClickCount <= messages.length) {
+                message.style.display = 'block';
+                message.textContent = messages[noClickCount - 1];
+            } else {
+                message.style.display = 'block';
+                message.textContent = 'Está bien, ¡te daré tiempo para pensarlo! 😅';
+            }
+        });
+    </script>
+</body>
+</html>
+
